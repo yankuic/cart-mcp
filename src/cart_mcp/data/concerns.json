@@ -1,0 +1,166 @@
+{
+  "source": "USDA NRCS CART public reference repository (https://github.com/jneme910/CART)",
+  "concerns": [
+    {
+      "key": "Agricultural Organic Soil Subsidence",
+      "name": "Agricultural Organic Soil Subsidence",
+      "type": "A",
+      "source": "cointerp (mrulename 'SOH - Agricultural Organic Soil Subsidence')",
+      "computable": true,
+      "attribute_name": "Agricultural Organic Soil Subsidence",
+      "pipeline_doc": "docs/computations/subsidence_computation.md"
+    },
+    {
+      "key": "Soil Susceptibility to Compaction",
+      "name": "Soil Susceptibility to Compaction",
+      "type": "A",
+      "source": "cointerp (mrulename 'SOH - Soil Susceptibility to Compaction')",
+      "computable": true,
+      "attribute_name": "Soil Susceptibility to Compaction",
+      "pipeline_doc": "docs/computations/type_a_cointerp_concerns.md"
+    },
+    {
+      "key": "Organic Matter Depletion",
+      "name": "Organic Matter Depletion",
+      "type": "A",
+      "source": "cointerp (mrulename 'SOH - Organic Matter Depletion')",
+      "computable": true,
+      "attribute_name": "Organic Matter Depletion",
+      "pipeline_doc": "docs/computations/type_a_cointerp_concerns.md"
+    },
+    {
+      "key": "Surface Salt Concentration",
+      "name": "Surface Salt Concentration",
+      "type": "A",
+      "source": "cointerp (mrulename 'SOH - Concentration of Salts- Soil Surface')",
+      "computable": true,
+      "attribute_name": "Surface Salt Concentration",
+      "pipeline_doc": "docs/computations/type_a_cointerp_concerns.md"
+    },
+    {
+      "key": "Suitability for Aerobic Soil Organisms",
+      "name": "Suitability for Aerobic Soil Organisms",
+      "type": "A",
+      "source": "cointerp (mrulename 'SOH - Suitability for Aerobic Soil Organisms')",
+      "computable": true,
+      "attribute_name": "Limitations for Aerobic Soil Organisms",
+      "attribute_alias": "Limitations for Aerobic Soil Organisms",
+      "pipeline_doc": "docs/computations/type_a_cointerp_concerns.md"
+    },
+    {
+      "key": "Aggregate Stability",
+      "name": "Aggregate Stability",
+      "type": "A",
+      "source": "chorizon (custom formula: 49.7 + 13.7*log(om) + 0.61*clay - 0.0045*clay^2 - 0.28*esp - 0.06*esp^2)",
+      "computable": true,
+      "attribute_name": "Aggregate Stability",
+      "pipeline_doc": "docs/computations/aggregate_stability.md"
+    },
+    {
+      "key": "Ponding Frequency Class",
+      "name": "Ponding Frequency Class",
+      "type": "A",
+      "source": "cointerp (mrulename 'Ponding Frequency Class')",
+      "computable": true,
+      "attribute_name": "Ponding or Flooding",
+      "attribute_alias": "Ponding or Flooding",
+      "pipeline_doc": "docs/computations/type_a_cointerp_concerns.md"
+    },
+    {
+      "key": "Flooding Frequency Class",
+      "name": "Flooding Frequency Class",
+      "type": "A",
+      "source": "cointerp (mrulename 'Flooding Frequency Class')",
+      "computable": false,
+      "attribute_name": null,
+      "note": "Combined with ponding in the 'Ponding or Flooding' output attribute",
+      "pipeline_doc": "docs/computations/type_a_cointerp_concerns.md"
+    },
+    {
+      "key": "Hydric Rating by Map Unit",
+      "name": "Hydric Rating by Map Unit",
+      "type": "A",
+      "source": "cointerp (mrulename 'Hydric Rating by Map Unit')",
+      "computable": true,
+      "attribute_name": "Hydric Soils",
+      "attribute_alias": "Hydric Soils",
+      "pipeline_doc": "docs/computations/type_a_cointerp_concerns.md"
+    },
+    {
+      "key": "Farmland Classification",
+      "name": "Farmland Classification",
+      "type": "A",
+      "source": "mapunit.farmlndcl",
+      "computable": true,
+      "attribute_name": "Farm Class",
+      "attribute_alias": "Farm Class",
+      "pipeline_doc": "docs/computations/farmland_classification.md"
+    },
+    {
+      "key": "Depth to Water Table",
+      "name": "Depth to Water Table",
+      "type": "A",
+      "source": "cointerp (mrulename 'Depth to Water Table')",
+      "computable": true,
+      "attribute_name": "Water Table",
+      "attribute_alias": "Water Table",
+      "pipeline_doc": "docs/computations/type_a_cointerp_concerns.md"
+    },
+    {
+      "key": "Drainage Class",
+      "name": "Drainage Class",
+      "type": "A",
+      "source": "component.drainagecl",
+      "computable": true,
+      "attribute_name": "Easements Drainage",
+      "attribute_alias": "Easements Drainage",
+      "note": "The v1 template emits the easements drainage flag (Yes/No), not the full drainage class domain",
+      "pipeline_doc": "docs/computations/drainage_class.md"
+    },
+    {
+      "key": "Easements Farm Class",
+      "name": "Easements Farm Class",
+      "type": "A",
+      "source": "mapunit.farmlndcl (derived)",
+      "computable": true,
+      "attribute_name": "Easements Farm Class",
+      "pipeline_doc": "docs/computations/farmland_classification.md"
+    },
+    {
+      "key": "Available Water Storage",
+      "name": "Available Water Storage",
+      "type": "A",
+      "source": "muaggatt.aws0150wta",
+      "computable": true,
+      "attribute_name": "Available Water Storage",
+      "pipeline_doc": "docs/computations/available_water_storage.md"
+    },
+    {
+      "key": "Soil Organic Carbon Stock",
+      "name": "Soil Organic Carbon Stock",
+      "type": "B",
+      "source": "chorizon (formula: hzT * (om/1.724 * db3) * ((100-fragvol)/100))",
+      "computable": true,
+      "attribute_name": "Soil Organic Carbon Stock",
+      "pipeline_doc": "docs/computations/soc_computation.md"
+    },
+    {
+      "key": "Organic and Hydric Soils",
+      "name": "Organic and Hydric Soils",
+      "type": "A",
+      "source": "component hydric rating (derived)",
+      "computable": true,
+      "attribute_name": "Organic and Hydric Soils",
+      "pipeline_doc": "docs/computations/type_a_cointerp_concerns.md"
+    },
+    {
+      "key": "Easements Hydric Soils",
+      "name": "Easements Hydric Soils",
+      "type": "A",
+      "source": "component hydric rating (derived, 50% threshold)",
+      "computable": true,
+      "attribute_name": "Easements Hydric Soils",
+      "pipeline_doc": "docs/computations/type_a_cointerp_concerns.md"
+    }
+  ]
+}

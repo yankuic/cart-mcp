@@ -1,0 +1,25 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# --- CART reference source (not part of the MCP project) ---
+CART/
+
+# --- Generated example outputs ---
+examples/output/
+
+# --- Internal agent/docs not for public release ---
+opencode.json
+AGENTS.md
+ARCHITECTURE.md
+
+# --- OS/editor ---
+.DS_Store
+*.swp

@@ -1,0 +1,46 @@
+[project]
+name = "cart-mcp"
+version = "0.1.0"
+description = "MCP server for the USDA NRCS Conservation Assessment Ranking Tool (CART) soil-based resource concern ratings"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+dependencies = [
+    "mcp>=1.24,<2.0",
+    "fastmcp>=2.0",
+    "authlib>=1.6.7,<1.7",
+    "httpx>=0.27",
+    "shapely>=2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "ruff>=0.8",
+    "geopandas>=1.0",
+    "ipykernel>=6.29,<7",
+    "nbconvert>=7.16",
+    "matplotlib>=3.9",
+]
+
+[project.scripts]
+cart-mcp = "cart_mcp.__main__:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cart_mcp"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/cart_mcp/sql" = "cart_mcp/sql"
+"src/cart_mcp/data" = "cart_mcp/data"
+
+[tool.pytest.ini_options]
+markers = [
+    "network: tests that require live access to the public Soil Data Access web service",
+]
+addopts = "-m 'not network'"
+testpaths = ["tests"]

@@ -1,0 +1,67 @@
+{
+  "source": "docs/reference/interpretations.md (Soil Interpretation Names and Mappings)",
+  "interpretations": {
+    "Agricultural Organic Soil Subsidence": {
+      "mrulename": "SOH - Agricultural Organic Soil Subsidence",
+      "rulekey_source": "distinterpmd",
+      "ruledesign": "limitation"
+    },
+    "Soil Susceptibility to Compaction": {
+      "mrulename": "SOH - Soil Susceptibility to Compaction",
+      "rulekey_source": "distinterpmd",
+      "ruledesign": "limitation"
+    },
+    "Organic Matter Depletion": {
+      "mrulename": "SOH - Organic Matter Depletion",
+      "rulekey_source": "distinterpmd",
+      "ruledesign": "limitation"
+    },
+    "Surface Salt Concentration": {
+      "mrulename": "SOH - Concentration of Salts- Soil Surface",
+      "rulekey_source": "distinterpmd",
+      "ruledesign": "limitation"
+    },
+    "Suitability for Aerobic Soil Organisms": {
+      "mrulename": "SOH - Suitability for Aerobic Soil Organisms",
+      "rulekey_source": "distinterpmd",
+      "ruledesign": "suitability"
+    },
+    "Hydric Rating by Map Unit": {
+      "mrulename": "Hydric Rating by Map Unit",
+      "rulekey_source": "distinterpmd",
+      "ruledesign": null
+    },
+    "Ponding Frequency Class": {
+      "mrulename": "Ponding Frequency Class",
+      "rulekey_source": "distinterpmd",
+      "ruledesign": null
+    },
+    "Flooding Frequency Class": {
+      "mrulename": "Flooding Frequency Class",
+      "rulekey_source": "distinterpmd",
+      "ruledesign": null
+    },
+    "Available Water Storage": {
+      "mrulename": "Available Water Storage",
+      "rulekey_source": "distinterpmd",
+      "ruledesign": null
+    },
+    "Depth to Water Table": {
+      "mrulename": "Depth to Water Table",
+      "rulekey_source": "distinterpmd",
+      "ruledesign": null
+    },
+    "Drainage Class": {
+      "mrulename": "Drainage Class",
+      "rulekey_source": "distinterpmd",
+      "ruledesign": null
+    },
+    "Farmland Classification": {
+      "mrulename": null,
+      "rulekey_source": null,
+      "ruledesign": null,
+      "note": "Uses mapunit.farmlndcl, not cointerp"
+    }
+  },
+  "rating_domain_xml": "sdvattribute.maplegendxml stores rating labels in XML attributes; XPath uses @value, not text()"
+}

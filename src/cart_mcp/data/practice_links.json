@@ -1,0 +1,633 @@
+{
+  "Agricultural Organic Soil Subsidence": {
+    "resource_concern_component": "Subsidence",
+    "resource_concern_component_id": 153,
+    "practices": [
+      {
+        "code": "659",
+        "name": "Wetland Enhancement",
+        "points": 50.0
+      },
+      {
+        "code": "657",
+        "name": "Wetland Restoration",
+        "points": 50.0
+      }
+    ]
+  },
+  "Soil Susceptibility to Compaction": {
+    "resource_concern_component": "Compaction",
+    "resource_concern_component_id": 149,
+    "practices": [
+      {
+        "code": "327",
+        "name": "Conservation Cover",
+        "points": 40.0
+      },
+      {
+        "code": "342",
+        "name": "Critical Area Planting",
+        "points": 40.0
+      },
+      {
+        "code": "391",
+        "name": "Riparian Forest Buffer",
+        "points": 40.0
+      },
+      {
+        "code": "612",
+        "name": "Tree/Shrub Establishment",
+        "points": 40.0
+      },
+      {
+        "code": "380",
+        "name": "Windbreak/Shelterbelt Establishment",
+        "points": 40.0
+      },
+      {
+        "code": "324",
+        "name": "Deep Tillage",
+        "points": 15.0
+      },
+      {
+        "code": "340",
+        "name": "Cover Crop",
+        "points": 10.0
+      },
+      {
+        "code": "490",
+        "name": "Tree/Shrub Site Preparation",
+        "points": 10.0
+      }
+    ]
+  },
+  "Organic Matter Depletion": {
+    "resource_concern_component": "Organic matter depletion",
+    "resource_concern_component_id": 151,
+    "practices": [
+      {
+        "code": "658",
+        "name": "Wetland Creation",
+        "points": 50.0
+      },
+      {
+        "code": "659",
+        "name": "Wetland Enhancement",
+        "points": 50.0
+      },
+      {
+        "code": "657",
+        "name": "Wetland Restoration",
+        "points": 50.0
+      },
+      {
+        "code": "327",
+        "name": "Conservation Cover",
+        "points": 40.0
+      },
+      {
+        "code": "342",
+        "name": "Critical Area Planting",
+        "points": 40.0
+      },
+      {
+        "code": "386",
+        "name": "Field Border",
+        "points": 40.0
+      },
+      {
+        "code": "393",
+        "name": "Filter Strip",
+        "points": 40.0
+      },
+      {
+        "code": "412",
+        "name": "Grassed Waterway",
+        "points": 40.0
+      },
+      {
+        "code": "422",
+        "name": "Hedgerow Planting",
+        "points": 40.0
+      },
+      {
+        "code": "603",
+        "name": "Herbaceous Wind Barriers",
+        "points": 40.0
+      },
+      {
+        "code": "550",
+        "name": "Range Planting",
+        "points": 40.0
+      },
+      {
+        "code": "391",
+        "name": "Riparian Forest Buffer",
+        "points": 40.0
+      }
+    ]
+  },
+  "Surface Salt Concentration": {
+    "resource_concern_component": "Concentration of salts or other chemicals",
+    "resource_concern_component_id": 150,
+    "practices": [
+      {
+        "code": "327",
+        "name": "Conservation Cover",
+        "points": 50.0
+      },
+      {
+        "code": "610",
+        "name": "Salinity and Sodic Soil Management",
+        "points": 50.0
+      },
+      {
+        "code": "512",
+        "name": "Forage and Biomass Planting",
+        "points": 40.0
+      },
+      {
+        "code": "550",
+        "name": "Range Planting",
+        "points": 40.0
+      },
+      {
+        "code": "340",
+        "name": "Cover Crop",
+        "points": 25.0
+      },
+      {
+        "code": "333",
+        "name": "Amending Soil Properties with Gypsum Products",
+        "points": 10.0
+      },
+      {
+        "code": "590",
+        "name": "Nutrient Management",
+        "points": 10.0
+      }
+    ]
+  },
+  "Suitability for Aerobic Soil Organisms": {
+    "resource_concern_component": "Soil organism habitat loss or degradation",
+    "resource_concern_component_id": 152,
+    "practices": [
+      {
+        "code": "658",
+        "name": "Wetland Creation",
+        "points": 50.0
+      },
+      {
+        "code": "659",
+        "name": "Wetland Enhancement",
+        "points": 50.0
+      },
+      {
+        "code": "657",
+        "name": "Wetland Restoration",
+        "points": 50.0
+      },
+      {
+        "code": "327",
+        "name": "Conservation Cover",
+        "points": 40.0
+      },
+      {
+        "code": "342",
+        "name": "Critical Area Planting",
+        "points": 40.0
+      },
+      {
+        "code": "386",
+        "name": "Field Border",
+        "points": 40.0
+      },
+      {
+        "code": "393",
+        "name": "Filter Strip",
+        "points": 40.0
+      },
+      {
+        "code": "412",
+        "name": "Grassed Waterway",
+        "points": 40.0
+      },
+      {
+        "code": "422",
+        "name": "Hedgerow Planting",
+        "points": 40.0
+      },
+      {
+        "code": "603",
+        "name": "Herbaceous Wind Barriers",
+        "points": 40.0
+      },
+      {
+        "code": "550",
+        "name": "Range Planting",
+        "points": 40.0
+      },
+      {
+        "code": "391",
+        "name": "Riparian Forest Buffer",
+        "points": 40.0
+      }
+    ]
+  },
+  "Aggregate Stability": {
+    "resource_concern_component": "Aggregate instability",
+    "resource_concern_component_id": 148,
+    "practices": [
+      {
+        "code": "658",
+        "name": "Wetland Creation",
+        "points": 50.0
+      },
+      {
+        "code": "659",
+        "name": "Wetland Enhancement",
+        "points": 50.0
+      },
+      {
+        "code": "657",
+        "name": "Wetland Restoration",
+        "points": 50.0
+      },
+      {
+        "code": "327",
+        "name": "Conservation Cover",
+        "points": 40.0
+      },
+      {
+        "code": "342",
+        "name": "Critical Area Planting",
+        "points": 40.0
+      },
+      {
+        "code": "386",
+        "name": "Field Border",
+        "points": 40.0
+      },
+      {
+        "code": "393",
+        "name": "Filter Strip",
+        "points": 40.0
+      },
+      {
+        "code": "412",
+        "name": "Grassed Waterway",
+        "points": 40.0
+      },
+      {
+        "code": "422",
+        "name": "Hedgerow Planting",
+        "points": 40.0
+      },
+      {
+        "code": "603",
+        "name": "Herbaceous Wind Barriers",
+        "points": 40.0
+      },
+      {
+        "code": "550",
+        "name": "Range Planting",
+        "points": 40.0
+      },
+      {
+        "code": "391",
+        "name": "Riparian Forest Buffer",
+        "points": 40.0
+      }
+    ]
+  },
+  "Soil Organic Carbon Stock": {
+    "resource_concern_component": "GHGs - carbon stock",
+    "resource_concern_component_id": 191,
+    "practices": [
+      {
+        "code": "327",
+        "name": "Conservation Cover",
+        "points": 70.0
+      },
+      {
+        "code": "512",
+        "name": "Forage and Biomass Planting",
+        "points": 70.0
+      },
+      {
+        "code": "612",
+        "name": "Tree/Shrub Establishment",
+        "points": 70.0
+      },
+      {
+        "code": "380",
+        "name": "Windbreak/Shelterbelt Establishment",
+        "points": 70.0
+      },
+      {
+        "code": "391",
+        "name": "Riparian Forest Buffer",
+        "points": 50.0
+      },
+      {
+        "code": "338",
+        "name": "Prescribed Burning",
+        "points": 30.0
+      },
+      {
+        "code": "528",
+        "name": "Prescribed Grazing",
+        "points": 30.0
+      },
+      {
+        "code": "390",
+        "name": "Riparian Herbaceous Cover",
+        "points": 30.0
+      },
+      {
+        "code": "381",
+        "name": "Silvopasture",
+        "points": 30.0
+      },
+      {
+        "code": "650",
+        "name": "Windbreak/Shelterbelt Renovation",
+        "points": 20.0
+      },
+      {
+        "code": "342",
+        "name": "Critical Area Planting",
+        "points": 10.0
+      },
+      {
+        "code": "386",
+        "name": "Field Border",
+        "points": 10.0
+      }
+    ]
+  },
+  "Ponding or Flooding": {
+    "resource_concern_component": "Ponding and flooding",
+    "resource_concern_component_id": 184,
+    "practices": [
+      {
+        "code": "310",
+        "name": "Bedding",
+        "points": 50.0
+      },
+      {
+        "code": "482",
+        "name": "Mole Drain",
+        "points": 50.0
+      },
+      {
+        "code": "582",
+        "name": "Open Channel",
+        "points": 50.0
+      },
+      {
+        "code": "606",
+        "name": "Subsurface Drain",
+        "points": 50.0
+      },
+      {
+        "code": "607",
+        "name": "Surface Drain, Field Ditch",
+        "points": 50.0
+      },
+      {
+        "code": "608",
+        "name": "Surface Drain, Main or Lateral",
+        "points": 50.0
+      },
+      {
+        "code": "630",
+        "name": "Vertical Drain",
+        "points": 50.0
+      },
+      {
+        "code": "326",
+        "name": "Clearing and Snagging",
+        "points": 30.0
+      },
+      {
+        "code": "412",
+        "name": "Grassed Waterway",
+        "points": 30.0
+      },
+      {
+        "code": "466",
+        "name": "Land Smoothing",
+        "points": 30.0
+      },
+      {
+        "code": "462",
+        "name": "Precision Land Forming",
+        "points": 30.0
+      },
+      {
+        "code": "570",
+        "name": "Stormwater Runoff Control",
+        "points": 30.0
+      }
+    ]
+  },
+  "Hydric Rating by Map Unit": {
+    "resource_concern_component": "Seasonal high water table",
+    "resource_concern_component_id": 185,
+    "practices": [
+      {
+        "code": "606",
+        "name": "Subsurface Drain",
+        "points": 50.0
+      },
+      {
+        "code": "630",
+        "name": "Vertical Drain",
+        "points": 50.0
+      },
+      {
+        "code": "554",
+        "name": "Drainage Water Management",
+        "points": 30.0
+      },
+      {
+        "code": "582",
+        "name": "Open Channel",
+        "points": 30.0
+      },
+      {
+        "code": "607",
+        "name": "Surface Drain, Field Ditch",
+        "points": 30.0
+      },
+      {
+        "code": "608",
+        "name": "Surface Drain, Main or Lateral",
+        "points": 30.0
+      },
+      {
+        "code": "620",
+        "name": "Underground Outlet",
+        "points": 30.0
+      },
+      {
+        "code": "412",
+        "name": "Grassed Waterway",
+        "points": 25.0
+      },
+      {
+        "code": "654",
+        "name": "Road/Trail/Landing Closure & Treatment",
+        "points": 25.0
+      },
+      {
+        "code": "311",
+        "name": "Alley Cropping",
+        "points": 20.0
+      },
+      {
+        "code": "468",
+        "name": "Lined Waterway or Outlet",
+        "points": 20.0
+      },
+      {
+        "code": "482",
+        "name": "Mole Drain",
+        "points": 20.0
+      }
+    ]
+  },
+  "Depth to Water Table": {
+    "resource_concern_component": "Seasonal high water table",
+    "resource_concern_component_id": 185,
+    "practices": [
+      {
+        "code": "606",
+        "name": "Subsurface Drain",
+        "points": 50.0
+      },
+      {
+        "code": "630",
+        "name": "Vertical Drain",
+        "points": 50.0
+      },
+      {
+        "code": "554",
+        "name": "Drainage Water Management",
+        "points": 30.0
+      },
+      {
+        "code": "582",
+        "name": "Open Channel",
+        "points": 30.0
+      },
+      {
+        "code": "607",
+        "name": "Surface Drain, Field Ditch",
+        "points": 30.0
+      },
+      {
+        "code": "608",
+        "name": "Surface Drain, Main or Lateral",
+        "points": 30.0
+      },
+      {
+        "code": "620",
+        "name": "Underground Outlet",
+        "points": 30.0
+      },
+      {
+        "code": "412",
+        "name": "Grassed Waterway",
+        "points": 25.0
+      },
+      {
+        "code": "654",
+        "name": "Road/Trail/Landing Closure & Treatment",
+        "points": 25.0
+      },
+      {
+        "code": "311",
+        "name": "Alley Cropping",
+        "points": 20.0
+      },
+      {
+        "code": "468",
+        "name": "Lined Waterway or Outlet",
+        "points": 20.0
+      },
+      {
+        "code": "482",
+        "name": "Mole Drain",
+        "points": 20.0
+      }
+    ]
+  },
+  "Available Water Storage": {
+    "resource_concern_component": "Moisture Management",
+    "resource_concern_component_id": 183,
+    "practices": [
+      {
+        "code": "554",
+        "name": "Drainage Water Management",
+        "points": 40.0
+      },
+      {
+        "code": "325",
+        "name": "High Tunnel System",
+        "points": 35.0
+      },
+      {
+        "code": "311",
+        "name": "Alley Cropping",
+        "points": 30.0
+      },
+      {
+        "code": "328",
+        "name": "Conservation Crop Rotation",
+        "points": 30.0
+      },
+      {
+        "code": "340",
+        "name": "Cover Crop",
+        "points": 30.0
+      },
+      {
+        "code": "422",
+        "name": "Hedgerow Planting",
+        "points": 30.0
+      },
+      {
+        "code": "603",
+        "name": "Herbaceous Wind Barriers",
+        "points": 30.0
+      },
+      {
+        "code": "466",
+        "name": "Land Smoothing",
+        "points": 30.0
+      },
+      {
+        "code": "484",
+        "name": "Mulching",
+        "points": 30.0
+      },
+      {
+        "code": "570",
+        "name": "Stormwater Runoff Control",
+        "points": 30.0
+      },
+      {
+        "code": "612",
+        "name": "Tree/Shrub Establishment",
+        "points": 30.0
+      },
+      {
+        "code": "380",
+        "name": "Windbreak/Shelterbelt Establishment",
+        "points": 30.0
+      }
+    ]
+  }
+}

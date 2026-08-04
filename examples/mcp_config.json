@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/mcp.json",
+  "mcpServers": {
+    "cart": {
+      "type": "stdio",
+      "command": "uv",
+      "args": ["--directory", "${REPO_ROOT}", "run", "cart-mcp"]
+    },
+    "qgis": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["--from", "https://github.com/nkarasiak/qgis-mcp/archive/refs/heads/main.zip", "qgis-mcp-server"]
+    }
+  }
+}

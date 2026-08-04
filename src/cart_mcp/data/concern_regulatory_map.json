@@ -1,0 +1,79 @@
+{
+  "source": "docs/aiq_research_nrcs_cart.md section 9 (summary crosswalk of CART resource concerns to EPA/NEPA regulatory references)",
+  "concern_regulatory_map": {
+    "Aggregate Stability": [
+      {
+        "domain": "Soil Erosion & Stability",
+        "regulatory_references": ["7 CFR \u00a7 650.5 (Environmental Evaluation)", "EPA Water Quality Standards"]
+      }
+    ],
+    "Organic Matter Depletion": [
+      {
+        "domain": "Water Quality (Nitrate, Phosphorus)",
+        "regulatory_references": ["EPA Clean Water Act \u00a7 303(d) (Nutrient Criteria)", "7 CFR \u00a7 650.5"]
+      }
+    ],
+    "Soil Organic Carbon Stock": [
+      {
+        "domain": "Air Quality (PM, NOx, GHG)",
+        "regulatory_references": ["EPA Clean Air Act", "7 CFR \u00a7 650.5"]
+      },
+      {
+        "domain": "Water Quality (Nitrate, Phosphorus)",
+        "regulatory_references": ["EPA Clean Water Act \u00a7 303(d) (Nutrient Criteria)", "7 CFR \u00a7 650.5"]
+      }
+    ],
+    "Surface Salt Concentration": [
+      {
+        "domain": "Water Quality (Nitrate, Phosphorus)",
+        "regulatory_references": ["EPA Clean Water Act \u00a7 303(d) (Nutrient Criteria)", "7 CFR \u00a7 650.5"]
+      }
+    ],
+    "Suitability for Aerobic Soil Organisms": [
+      {
+        "domain": "Wildlife Habitat",
+        "regulatory_references": ["ESA \u00a7 7 Consultation", "EPA Pesticide Mitigation Measures"]
+      }
+    ],
+    "Hydric Rating by Map Unit": [
+      {
+        "domain": "Wildlife Habitat",
+        "regulatory_references": ["ESA \u00a7 7 Consultation", "EPA Pesticide Mitigation Measures"]
+      },
+      {
+        "domain": "Floodplain & Hydrology",
+        "regulatory_references": ["FEMA NFIP Guidelines", "EPA Watershed Management Standards"]
+      }
+    ],
+    "Ponding Frequency Class": [
+      {
+        "domain": "Floodplain & Hydrology",
+        "regulatory_references": ["FEMA NFIP Guidelines", "EPA Watershed Management Standards"]
+      }
+    ],
+    "Flooding Frequency Class": [
+      {
+        "domain": "Floodplain & Hydrology",
+        "regulatory_references": ["FEMA NFIP Guidelines", "EPA Watershed Management Standards"]
+      }
+    ],
+    "Depth to Water Table": [
+      {
+        "domain": "Floodplain & Hydrology",
+        "regulatory_references": ["FEMA NFIP Guidelines", "EPA Watershed Management Standards"]
+      }
+    ],
+    "Drainage Class": [
+      {
+        "domain": "Floodplain & Hydrology",
+        "regulatory_references": ["FEMA NFIP Guidelines", "EPA Watershed Management Standards"]
+      }
+    ],
+    "Agricultural Organic Soil Subsidence": [
+      {
+        "domain": "Soil Erosion & Stability",
+        "regulatory_references": ["7 CFR \u00a7 650.5 (Environmental Evaluation)", "EPA Water Quality Standards"]
+      }
+    ]
+  }
+}

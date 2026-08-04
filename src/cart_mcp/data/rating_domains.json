@@ -1,0 +1,92 @@
+{
+  "source": "docs/reference/rating_domains.md (rating classes ordered worst to best)",
+  "domains": {
+    "Agricultural Organic Soil Subsidence": [
+      "Severe subsidence",
+      "Moderate subsidence",
+      "Low subsidence",
+      "Mineral soil",
+      "Not rated"
+    ],
+    "Soil Susceptibility to Compaction": [
+      "High",
+      "Medium",
+      "Low",
+      "Not rated"
+    ],
+    "Organic Matter Depletion": [
+      "OM depletion high",
+      "OM depletion moderately high",
+      "OM depletion moderate",
+      "OM depletion moderately low",
+      "OM depletion low",
+      "Not rated"
+    ],
+    "Surface Salt Concentration": [
+      "High surface salinization risk or already saline",
+      "Surface salinization risk",
+      "Low surface salinization risk",
+      "Not rated"
+    ],
+    "Suitability for Aerobic Soil Organisms": [
+      "Not favorable",
+      "Somewhat favorable",
+      "Very favorable",
+      "Not rated"
+    ],
+    "Aggregate Stability": [
+      "Low",
+      "Moderate",
+      "Moderately high",
+      "High",
+      "Not rated"
+    ],
+    "Soil Organic Carbon Stock": {
+      "source": "docs/reference/rating_domains.md",
+      "classes": [
+        "None",
+        "Very low",
+        "Low",
+        "Moderate",
+        "Moderately high",
+        "High",
+        "Not rated"
+      ],
+      "thresholds_mg_ha": [
+        {"class": "None", "value": 1, "range": "0"},
+        {"class": "Very low", "value": 2, "range": ">0 to <10"},
+        {"class": "Low", "value": 3, "range": "10 to <25"},
+        {"class": "Moderate", "value": 4, "range": "25 to <50"},
+        {"class": "Moderately high", "value": 5, "range": "50 to <100"},
+        {"class": "High", "value": 6, "range": ">=100"},
+        {"class": "Not rated", "value": 7, "range": "NULL"}
+      ]
+    },
+    "Hydric Rating by Map Unit": [
+      "Hydric",
+      "Partially hydric",
+      "Not hydric",
+      "Not rated"
+    ],
+    "Organic and Hydric Soils": ["Yes", "No", "Not rated"],
+    "Easements Hydric Soils": ["Yes", "No", "Not rated"],
+    "Ponding Frequency Class": ["(per domain values)"],
+    "Flooding Frequency Class": ["(per domain values)"],
+    "Depth to Water Table": ["(per domain values)"],
+    "Available Water Storage": ["Yes", "No", "Not rated"],
+    "Easements Farm Class": ["Yes", "No", "Not rated"],
+    "Easements Drainage": ["Yes", "No", "Not rated"],
+    "Drainage Class": ["(per drainage class: well drained, moderately well drained, etc.)"],
+    "Farmland Classification": [
+      "Prime",
+      "Prime if",
+      "State",
+      "State if",
+      "Local",
+      "Local if",
+      "Unique",
+      "Not Prime / Not rated"
+    ]
+  },
+  "rating_key_format": "{attributename}:{rating_num}"
+}
