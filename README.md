@@ -74,19 +74,6 @@ If the client reports `uv: command not found` (GUI clients on macOS/Linux often
 do not inherit the shell PATH where uv was installed), replace `"command": "uv"`
 with the absolute path from `which uv` (`where uv` on Windows).
 
-Add to your MCP client config (opencode, Claude Desktop, etc.):
-
-```json
-{
-  "mcpServers": {
-    "cart": {
-      "command": "uv",
-      "args": ["--directory", "/path/to/cart-assistant", "run", "cart-mcp"]
-    }
-  }
-}
-```
-
 opencode users can preconfigure both servers in a root `opencode.json`; all other clients
 use `examples/mcp_config.json` as a template.
 
