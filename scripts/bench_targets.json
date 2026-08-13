@@ -1,0 +1,24 @@
+{
+  "base_url": "http://100.86.179.110:8000/v1",
+  "api_key_env": "DYNAMIC_MODEL_API_KEY",
+  "targets": [
+    {
+      "label": "qwen3.6-27b-mtp",
+      "model": "unsloth/Qwen3.6-27B-MTP-GGUF",
+      "load": {"model_path": "unsloth/Qwen3.6-27B-MTP-GGUF"}
+    },
+    {
+      "label": "qwen3.5-122b-a10b",
+      "model": "unsloth/Qwen3.5-122B-A10B-MTP-GGUF",
+      "load": {
+        "model_path": "unsloth/Qwen3.5-122B-A10B-MTP-GGUF",
+        "max_seq_length": 32768
+      }
+    },
+    {
+      "label": "thinkingcap-qwen3.6-27b",
+      "model": "bottlecapai/ThinkingCap-Qwen3.6-27B-GGUF",
+      "load": {"model_path": "bottlecapai/ThinkingCap-Qwen3.6-27B-GGUF"}
+    }
+  ]
+}

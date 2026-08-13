@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from shapely import wkt as shapely_wkt
 from shapely.errors import GEOSException
+from shapely.geometry import shape
 
 MAX_COORD_DECIMALS = 6
 
@@ -32,6 +33,22 @@ def wkt_to_geojson(wkt: str | None) -> dict | None:
     if geom.is_empty or not geom.is_valid:
         return None
     return _round_coords(geom.__geo_interface__)
+
+
+def simplify_geojson(geometry: dict, tolerance: float) -> dict:
+    """Simplify a GeoJSON geometry dict using shapely's Douglas-Peucker.
+
+    Invalid, empty, or non-polygonal geometries are returned unchanged. The
+    result is rounded to MAX_COORD_DECIMALS so payloads stay small.
+    """
+    try:
+        geom = shape(geometry)
+    except (GEOSException, ValueError, AttributeError):
+        return geometry
+    if geom.is_empty or not geom.is_valid or geom.geom_type not in ("Polygon", "MultiPolygon"):
+        return geometry
+    simplified = geom.simplify(tolerance, preserve_topology=True)
+    return _round_coords(simplified.__geo_interface__)
 
 
 def build_feature_collection(

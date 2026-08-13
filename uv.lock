@@ -10,6 +10,9 @@ resolution-markers = [
     "python_full_version < '3.14' and sys_platform != 'emscripten' and sys_platform != 'win32'",
 ]
 
+[manifest]
+constraints = [{ name = "authlib", specifier = "<1.7" }]
+
 [[package]]
 name = "annotated-doc"
 version = "0.0.5"
@@ -149,7 +152,6 @@ name = "cart-mcp"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
-    { name = "authlib" },
     { name = "fastmcp" },
     { name = "httpx" },
     { name = "mcp" },
@@ -169,7 +171,6 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "authlib", specifier = ">=1.6.7,<1.7" },
     { name = "fastmcp", specifier = ">=2.0" },
     { name = "geopandas", marker = "extra == 'dev'", specifier = ">=1.0" },
     { name = "httpx", specifier = ">=0.27" },

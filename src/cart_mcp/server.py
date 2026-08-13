@@ -5,13 +5,14 @@ service or embedded public-domain assets - no credentials, no private endpoints.
 from __future__ import annotations
 
 import json
+import os
 from typing import Literal
 
 from fastmcp import FastMCP
 
 from . import data as cart_data
 from . import pipeline, sda
-from .geo import build_feature_collection
+from .geo import build_feature_collection, simplify_geojson
 from .prompts import register_prompts
 
 DISCLAIMER = (
@@ -21,6 +22,14 @@ DISCLAIMER = (
     "come from your local NRCS field office. Ratings are only as fresh as each survey "
     "area's last publication date (included per landunit)."
 )
+
+# GeoJSON map-tool ceilings. Feature-count and byte caps bound the payload so a
+# large AOI cannot dump an unbounded document into context; the simplify
+# tolerance lightens per-feature geometry. Dropped features / oversize geometry
+# set `truncated` on the tool response (see _apply_geojson_caps).
+GEO_MAX_FEATURES = int(os.environ.get("GEO_MAX_FEATURES", "200"))
+GEO_MAX_BYTES = int(os.environ.get("GEO_MAX_BYTES", "262144"))
+GEO_SIMPLIFY_TOLERANCE = float(os.environ.get("GEO_SIMPLIFY_TOLERANCE", "0.0001"))
 
 mcp = FastMCP("cart")
 
@@ -49,10 +58,6 @@ def _rate(landunits: list[tuple[str, str]], concerns: list[str] | None) -> dict:
     return {
         "landunits": [name for name, _ in landunits],
         "ratings": ratings,
-        "ratable_concerns": [
-            c["key"] for c in cart_data.load_concerns().values() if c["computable"]
-        ],
-        "disclaimer": DISCLAIMER,
     }
 
 
@@ -72,6 +77,24 @@ def rate_aoi(
     return _rate([(landunit, wkt)], concerns)
 
 
+def _rate_aois(aois: list[dict], concerns: list[str] | None = None) -> dict:
+    """Rate multiple landunits; invalid WKTs are reported per-landunit in `errors`."""
+    valid: list[tuple[str, str]] = []
+    errors: list[dict] = []
+    for a in aois:
+        name = str(a.get("landunit", "")).strip()
+        try:
+            wkt = pipeline.validate_wkt(str(a.get("wkt", "")))
+        except ValueError as exc:
+            errors.append({"landunit": name, "error": str(exc)})
+            continue
+        valid.append((name, wkt))
+
+    result = _rate(valid, concerns)
+    result["errors"] = errors
+    return result
+
+
 @mcp.tool()
 def rate_aois(
     aois: list[dict],
@@ -81,9 +104,9 @@ def rate_aois(
 
     `aois` is a list of {"landunit": str (<=20 chars), "wkt": str (EPSG:4326)}.
     Ideal for comparing fields/parcels (e.g., EQIP/CSP portal parcel exploration).
+    Invalid WKTs are reported per-landunit in `errors` without sinking the others.
     """
-    landunits = [(a["landunit"], a["wkt"]) for a in aois]
-    return _rate(landunits, concerns)
+    return _rate_aois(aois, concerns)
 
 
 @mcp.tool()
@@ -98,6 +121,53 @@ def get_aoi_soil_summary(wkt: str, landunit: str = "AOI 1") -> dict:
     result = sda.submit(query)
     rows = [{k: (v if v is not None else None) for k, v in row.items()} for row in result.rows]
     return {"landunit": landunit, "map_units": rows, "columns": result.columns}
+
+
+def _apply_geojson_caps(
+    features: list[dict],
+    *,
+    feature_cap: int = GEO_MAX_FEATURES,
+    byte_cap: int = GEO_MAX_BYTES,
+    simplify_tolerance: float = GEO_SIMPLIFY_TOLERANCE,
+) -> tuple[list[dict], bool, int]:
+    """Enforce the GeoJSON three ceilings on a feature list.
+
+    Each feature's geometry is simplified with the base tolerance, then kept only
+    while the running serialized byte total stays under `byte_cap` and the count
+    under `feature_cap`. A single feature that alone exceeds the byte budget has
+    its tolerance escalated (doubled) up to 5 times; if it still does not fit it
+    is dropped. Returns (kept_features, truncated, dropped_count).
+    """
+    kept: list[dict] = []
+    total_bytes = 0
+    truncated = False
+    dropped = 0
+
+    for feature in features:
+        geom = feature.get("geometry")
+        if geom is not None:
+            tolerance = simplify_tolerance
+            for _ in range(6):
+                simplified = simplify_geojson(geom, tolerance)
+                serialized = json.dumps(simplified, default=str)
+                if len(serialized) <= byte_cap:
+                    break
+                tolerance *= 2
+            else:
+                dropped += 1
+                truncated = True
+                continue
+            feature = {**feature, "geometry": simplified}
+
+        serialized = json.dumps(feature, default=str)
+        if len(kept) >= feature_cap or total_bytes + len(serialized) > byte_cap:
+            truncated = True
+            dropped += 1
+            continue
+        kept.append(feature)
+        total_bytes += len(serialized)
+
+    return kept, truncated, dropped
 
 
 def _soil_map(wkt: str, landunit: str) -> dict:
@@ -115,11 +185,14 @@ def _soil_map(wkt: str, landunit: str) -> dict:
             "poly_acres",
         ],
     )
+    kept, truncated, dropped = _apply_geojson_caps(feature_collection["features"])
     return {
         "landunit": landunit,
         "type": feature_collection["type"],
-        "features": feature_collection["features"],
-        "feature_count": len(feature_collection["features"]),
+        "features": kept,
+        "feature_count": len(kept),
+        "truncated": truncated,
+        "dropped_features": dropped,
     }
 
 
@@ -140,12 +213,15 @@ def _risk_map(wkt: str, concern: str, landunit: str) -> dict:
         ],
     )
     profile = cart_data.find_concern(concern)
+    kept, truncated, dropped = _apply_geojson_caps(feature_collection["features"])
     return {
         "landunit": landunit,
         "concern": profile["key"] if profile else concern,
         "type": feature_collection["type"],
-        "features": feature_collection["features"],
-        "feature_count": len(feature_collection["features"]),
+        "features": kept,
+        "feature_count": len(kept),
+        "truncated": truncated,
+        "dropped_features": dropped,
     }
 
 
@@ -155,7 +231,9 @@ def get_aoi_soil_map(wkt: str, landunit: str = "AOI 1") -> dict:
 
     Each feature is a soil polygon clipped to the AOI with properties
     {landunit, mukey, musym, muname, invesintens, farmlndcl, poly_acres}.
-    Render directly with Leaflet/ArcGIS; no ratings are computed.
+    Render directly with Leaflet/ArcGIS; no ratings are computed. Feature-count
+    and byte caps bound the payload; `truncated`/`dropped_features` report if
+    any features were omitted.
     """
     return _soil_map(wkt, landunit)
 
@@ -169,7 +247,8 @@ def get_aoi_risk_map(wkt: str, concern: str, landunit: str = "AOI 1") -> dict:
     unit. Order 5 survey map units are rated 'Not rated'. Supports cointerp-backed
     concerns only (e.g. the five SOH concerns, Hydric, Ponding/Flooding, AWS,
     Depth to Water Table, Drainage Class); SOC and other custom concerns raise
-    an error.
+    an error. Feature-count and byte caps bound the payload; `truncated`/
+    `dropped_features` report if any features were omitted.
     """
     return _risk_map(wkt, concern, landunit)
 
@@ -198,7 +277,37 @@ def _resolve_concern(name: str) -> dict:
     return profile
 
 
-def _concern_details(name: str) -> dict:
+def _rating_classes(domain) -> list:
+    """Normalize a rating domain value to an ordered class list.
+
+    Most concerns are a flat list; Soil Organic Carbon Stock is a dict with a
+    `classes` key - extract it so summaries stay compact and consistent.
+    """
+    if isinstance(domain, dict):
+        return list(domain.get("classes") or [])
+    if isinstance(domain, list):
+        return list(domain)
+    return []
+
+
+def _concern_summary(name: str) -> dict:
+    """Compact concern profile: key, display name, rating classes, top-3 practices."""
+    profile = _resolve_concern(name)
+    key = profile["key"]
+    practices = (cart_data.load_practice_links().get(key) or {}).get("practices") or []
+    return {
+        "concern": key,
+        "name": profile.get("name", key),
+        "rating_domain": _rating_classes(cart_data.load_rating_domains().get(key)),
+        "top_practices": [
+            {"code": p.get("code"), "name": p.get("name")} for p in practices[:3]
+        ],
+    }
+
+
+def _concern_details(name: str, *, summary: bool = False) -> dict:
+    if summary:
+        return _concern_summary(name)
     key = _resolve_concern(name)["key"]
     return {
         "concern": _resolve_concern(name),
@@ -221,9 +330,12 @@ def list_concerns() -> dict:
 
 
 @mcp.tool()
-def get_concern_details(concern: str) -> dict:
-    """Full profile for one concern: domain, practices, regulatory references."""
-    return _concern_details(concern)
+def get_concern_details(concern: str, summary: bool = False) -> dict:
+    """Profile for one concern. summary=True returns a compact profile (name,
+    rating classes, top-3 practices); False returns the full profile (practices,
+    regulatory references, interpretation). Use summary for every concern, full
+    only for the top 2-3 of interest."""
+    return _concern_details(concern, summary=summary)
 
 
 @mcp.tool()
@@ -268,6 +380,12 @@ def validate_pipeline() -> dict:
 
 
 # ---------------------------------------------------------------- resources
+
+
+@mcp.resource("cart://disclaimer")
+def resource_disclaimer() -> str:
+    """Advisory disclaimer for ratings (one-line pointer)."""
+    return DISCLAIMER
 
 
 @mcp.resource("cart://concerns")

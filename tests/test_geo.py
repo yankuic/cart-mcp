@@ -1,6 +1,6 @@
 import json
 
-from cart_mcp.geo import build_feature_collection, wkt_to_geojson
+from cart_mcp.geo import build_feature_collection, simplify_geojson, wkt_to_geojson
 
 POLYGON_WKT = (
     "POLYGON ((-102.1334674808154 45.94464605628315, -102.1305452386178 45.94466255078163, "
@@ -52,3 +52,21 @@ def test_build_feature_collection():
 def test_build_feature_collection_empty():
     fc = build_feature_collection([], ["mukey"])
     assert fc == {"type": "FeatureCollection", "features": []}
+
+
+def test_simplify_geojson_reduces_vertices():
+    dense = {
+        "type": "Polygon",
+        "coordinates": [
+            [(0, 0), (0.0001, 0.0001), (0.0002, 0), (1, 0), (1, 1), (0, 1), (0, 0)]
+        ],
+    }
+    out = simplify_geojson(dense, tolerance=0.01)
+    assert out["type"] == "Polygon"
+    # co-linear / near points removed by simplification
+    assert len(out["coordinates"][0]) < len(dense["coordinates"][0])
+
+
+def test_simplify_geojson_passes_through_non_polygon():
+    point = {"type": "Point", "coordinates": [1, 2]}
+    assert simplify_geojson(point, tolerance=0.01) == point

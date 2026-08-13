@@ -8,7 +8,6 @@ license = { text = "MIT" }
 dependencies = [
     "mcp>=1.24,<2.0",
     "fastmcp>=2.0",
-    "authlib>=1.6.7,<1.7",
     "httpx>=0.27",
     "shapely>=2.0",
 ]
@@ -41,6 +40,13 @@ packages = ["src/cart_mcp"]
 [tool.pytest.ini_options]
 markers = [
     "network: tests that require live access to the public Soil Data Access web service",
+    "bench: tests that require a reachable LLM endpoint (see scripts/bench_llm.py)",
 ]
-addopts = "-m 'not network'"
+addopts = "-m 'not network and not bench'"
 testpaths = ["tests"]
+
+[tool.uv]
+# authlib is a transitive dep of fastmcp; pin <1.7 to suppress the
+# AuthlibDeprecationWarning emitted by fastmcp's unconditional `import authlib.jose`
+# (see memory-bank/progress.md 2026-08-01).
+constraint-dependencies = ["authlib<1.7"]
