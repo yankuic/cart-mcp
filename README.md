@@ -10,9 +10,20 @@ This MCP server computes soil resource concern ratings for an area of interest (
 
 ## Install
 
-Requires Python >= 3.12 and [uv](https://docs.astral.sh/uv/).
+Requires Python >= 3.12 and [uv](https://docs.astral.sh/uv/). If uv is not installed yet:
 
 ```bash
+# macOS / Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+# Windows (PowerShell)
+# irm https://astral.sh/uv/install.ps1 | iex
+```
+
+Then install the dependencies (uv auto-downloads a managed Python >= 3.12 if the
+system interpreter is older):
+
+```bash
+uv --version   # sanity check
 uv sync
 ```
 
@@ -30,7 +41,38 @@ Or during development:
 uv run python -m cart_mcp
 ```
 
+### Verify the install
+
+Confirm the server boots and exposes its tools (no network needed):
+
+```bash
+uv run python -c "import asyncio; from cart_mcp.server import mcp; [asyncio.run(mcp._list_tools(None)), print('ok')]"
+```
+
+Plain `uv run cart-mcp` (stdio) stays running by design, waiting for MCP traffic
+from the client; a quiet, non-exiting process is healthy. GUI users can instead
+attach the [MCP Inspector](https://github.com/modelcontextprotocol/inspector)
+to verify the server interactively.
+
 ### Client configuration
+
+Add to your MCP client config (opencode, Claude Desktop, etc.). The config
+assumes `uv sync` has been run in the repo checkout:
+
+```json
+{
+  "mcpServers": {
+    "cart": {
+      "command": "uv",
+      "args": ["--directory", "/path/to/cart-assistant", "run", "cart-mcp"]
+    }
+  }
+}
+```
+
+If the client reports `uv: command not found` (GUI clients on macOS/Linux often
+do not inherit the shell PATH where uv was installed), replace `"command": "uv"`
+with the absolute path from `which uv` (`where uv` on Windows).
 
 Add to your MCP client config (opencode, Claude Desktop, etc.):
 

@@ -121,7 +121,8 @@ uv run cart-mcp --transport streamable-http --port 8000   # Streamable HTTP (rec
 uv run cart-mcp --transport sse --port 8000     # legacy HTTP+SSE
 ```
 
-Register it in any MCP client config:
+Register it in any MCP client config (assumes `uv sync` was run in the repo; see
+README's Install section if uv is missing):
 
 ```json
 {
@@ -133,6 +134,10 @@ Register it in any MCP client config:
   }
 }
 ```
+
+If the client reports `uv: command not found` (GUI clients on macOS/Linux often
+do not inherit the shell PATH), use the absolute path from `which uv` (`where uv`
+on Windows) as `command`.
 
 ### QGIS orchestration
 
